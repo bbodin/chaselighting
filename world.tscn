@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn5ouhtvegr5f"]
+
+[ext_resource type="PackedScene" uid="uid://5nb0otq2amsd" path="res://player.tscn" id="1_krph3"]
+[ext_resource type="PackedScene" uid="uid://c5krr305efk35" path="res://monster.tscn" id="2_5eggc"]
+[ext_resource type="Script" path="res://player.gd" id="2_m54cn"]
+[ext_resource type="PackedScene" uid="uid://blcrhr526kw13" path="res://goal.tscn" id="4_oh68q"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_2hakq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4oqr"]
+next_pass = SubResource("PhysicalSkyMaterial_2hakq")
+transparency = 1
+metallic = 0.23
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mnkqs"]
+size = Vector3(23.0486, 0.895386, 19.5995)
+
+[node name="world" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_krph3")]
+script = ExtResource("2_m54cn")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(0.999999, -0.000612489, 0.000870872, 0.00011345, 0.874603, 0.48484, -0.00105863, -0.48484, 0.874602, 0.800991, 5.33454, 11.3274)
+doppler_tracking = 2
+fov = 73.9624
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.85458, -1.24192, 13.3658)
+size = Vector3(26.6453, 1.22607, 34.3189)
+material = SubResource("StandardMaterial3D_r4oqr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04648, -1.09125, 5.9428)
+shape = SubResource("BoxShape3D_mnkqs")
+
+[node name="Monster" parent="." instance=ExtResource("2_5eggc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.83169)
+
+[node name="goal" parent="." instance=ExtResource("4_oh68q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46023, 0, 14.9772)

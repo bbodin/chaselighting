@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://blcrhr526kw13"]
+
+[ext_resource type="Script" path="res://goal.gd" id="1_frwkr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5j4sd"]
+height = 4.36912
+radius = 0.107946
+
+[node name="goal" type="Area3D"]
+script = ExtResource("1_frwkr")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0290556, 0.999578, 0, -0.999578, 0.0290556, 0, 2.96711, 0.22411)
+light_color = Color(0, 0.690196, 0.309804, 1)
+spot_angle = 9.31705
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07498, 0)
+shape = SubResource("CylinderShape3D_5j4sd")

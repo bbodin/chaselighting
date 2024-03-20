@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://5nb0otq2amsd"]
+
+[sub_resource type="GDScript" id="GDScript_p1oir"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m7lx0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n432f"]
+
+[node name="Player" type="CharacterBody3D"]
+script = SubResource("GDScript_p1oir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_m7lx0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_n432f")
