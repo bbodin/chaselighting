@@ -16,24 +16,21 @@ func _ready():
 
 func _on_player_nearby (body) : 
 	chase_it = true
-	print ( str(counter) + " Monster has seen the player:" + str(overlaps_body(player)) )
+	print ( str(counter) + " Monster has seen the player." )
 	counter += 1
 		
 func _on_body_entered (body) : 
 	if has_overlapping_bodies() :
-			print ( str(counter) + " Monster is player:" + str(overlaps_body(player)) )
+			print ( str(counter) + " Monster is on the player." )
 			counter += 1
 	else :
 		print ("beem!!! ")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (chase_it)  :
-		print (position)
 		var direction = (player.position -  self.position).normalized()
 		self.position.x += direction.x * 0.001 * counter
 		self.position.z += direction.z * 0.001 * counter
-		print (position)
 		if counter < 50 :
 			counter += 1
-	#print (str(player.position) + str(position))
-	#print ()
+
