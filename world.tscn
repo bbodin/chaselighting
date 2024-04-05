@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dn5ouhtvegr5f"]
+[gd_scene load_steps=13 format=3 uid="uid://dn5ouhtvegr5f"]
 
 [ext_resource type="PackedScene" uid="uid://5nb0otq2amsd" path="res://player.tscn" id="1_krph3"]
 [ext_resource type="PackedScene" uid="uid://c5krr305efk35" path="res://monster.tscn" id="2_5eggc"]
@@ -6,7 +6,6 @@
 [ext_resource type="Shader" path="res://flatFloor.gdshader" id="3_uddu0"]
 [ext_resource type="PackedScene" uid="uid://blcrhr526kw13" path="res://goal.tscn" id="4_oh68q"]
 [ext_resource type="PackedScene" uid="uid://bbb5uxmmqkn0s" path="res://shark.tscn" id="6_e66x6"]
-[ext_resource type="PackedScene" uid="uid://co36iulgrxcuk" path="res://Animals/model_92c_-_white_shark_mesh/scene.gltf" id="7_k4o6v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mnkqs"]
 size = Vector3(42.607, 0.895386, 43.286)
@@ -76,6 +75,3 @@ shadow_enabled = true
 
 [node name="Shark" parent="." instance=ExtResource("6_e66x6")]
 transform = Transform3D(-0.401244, 0, 0.915971, 0, 1, 0, -0.915971, 0, -0.401244, -4.716, -0.898774, 3.09906)
-
-[node name="Sketchfab_Scene" parent="." instance=ExtResource("7_k4o6v")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.491927, 2.28171, -10.6357)
