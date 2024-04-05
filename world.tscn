@@ -1,43 +1,81 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn5ouhtvegr5f"]
+[gd_scene load_steps=14 format=3 uid="uid://dn5ouhtvegr5f"]
 
 [ext_resource type="PackedScene" uid="uid://5nb0otq2amsd" path="res://player.tscn" id="1_krph3"]
 [ext_resource type="PackedScene" uid="uid://c5krr305efk35" path="res://monster.tscn" id="2_5eggc"]
 [ext_resource type="Script" path="res://player.gd" id="2_m54cn"]
+[ext_resource type="Shader" path="res://flatFloor.gdshader" id="3_uddu0"]
 [ext_resource type="PackedScene" uid="uid://blcrhr526kw13" path="res://goal.tscn" id="4_oh68q"]
-
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_2hakq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4oqr"]
-next_pass = SubResource("PhysicalSkyMaterial_2hakq")
-transparency = 1
-metallic = 0.23
+[ext_resource type="PackedScene" uid="uid://bbb5uxmmqkn0s" path="res://shark.tscn" id="6_e66x6"]
+[ext_resource type="PackedScene" uid="uid://co36iulgrxcuk" path="res://Animals/model_92c_-_white_shark_mesh/scene.gltf" id="7_k4o6v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mnkqs"]
-size = Vector3(23.0486, 0.895386, 19.5995)
+size = Vector3(42.607, 0.895386, 43.286)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nik8m"]
+render_priority = 0
+shader = ExtResource("3_uddu0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_objf5"]
+material = SubResource("ShaderMaterial_nik8m")
+size = Vector2(40, 40)
+subdivide_width = 90
+subdivide_depth = 90
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ba87r"]
+sky_top_color = Color(0.690196, 0.333333, 0.0470588, 1)
+sky_horizon_color = Color(0.615686, 0.647059, 0.792157, 1)
+ground_bottom_color = Color(0.772549, 0.737255, 0.960784, 1)
+
+[sub_resource type="Sky" id="Sky_rlfat"]
+sky_material = SubResource("ProceduralSkyMaterial_ba87r")
+
+[sub_resource type="Environment" id="Environment_axt2y"]
+background_mode = 2
+sky = SubResource("Sky_rlfat")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 
 [node name="world" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_krph3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.475865, 0)
 script = ExtResource("2_m54cn")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(0.999999, -0.000612489, 0.000870872, 0.00011345, 0.874603, 0.48484, -0.00105863, -0.48484, 0.874602, 0.800991, 5.33454, 11.3274)
+transform = Transform3D(0.268957, -0.636917, 0.722494, 0, 0.750136, 0.661284, -0.963152, -0.177857, 0.201754, 4.49643, 4.59135, 1.25561)
 doppler_tracking = 2
 fov = 73.9624
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.85458, -1.24192, 13.3658)
-size = Vector3(26.6453, 1.22607, 34.3189)
-material = SubResource("StandardMaterial3D_r4oqr")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04648, -1.09125, 5.9428)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2968, -1.09125, 9.52463)
 shape = SubResource("BoxShape3D_mnkqs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.94316, -0.328752, 10.0781)
+transparency = 1.0
+mesh = SubResource("PlaneMesh_objf5")
 
 [node name="Monster" parent="." instance=ExtResource("2_5eggc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.83169)
 
 [node name="goal" parent="." instance=ExtResource("4_oh68q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46023, 0, 14.9772)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_axt2y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.778046, 0.386201, -0.495473, 0, 0.788709, 0.614767, 0.628208, 0.478317, -0.613651, 0, 16.1991, 0)
+light_color = Color(0.945098, 0.839216, 0.956863, 1)
+light_energy = 3.181
+shadow_enabled = true
+
+[node name="Shark" parent="." instance=ExtResource("6_e66x6")]
+transform = Transform3D(-0.401244, 0, 0.915971, 0, 1, 0, -0.915971, 0, -0.401244, -4.716, -0.898774, 3.09906)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("7_k4o6v")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.491927, 2.28171, -10.6357)

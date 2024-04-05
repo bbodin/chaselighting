@@ -8,6 +8,9 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var next_direction
 
+func _ready() :
+	$AnimationPlayer.play("floating")
+
 func _input(event):
 	if event is InputEventScreenTouch:
 		print (event)

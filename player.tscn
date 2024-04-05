@@ -1,10 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://5nb0otq2amsd"]
+[gd_scene load_steps=7 format=3 uid="uid://5nb0otq2amsd"]
+
+[ext_resource type="PackedScene" uid="uid://do6jtuewuqnao" path="res://Factory/Barrel_A.gltf" id="1_r0k0v"]
 
 [sub_resource type="GDScript" id="GDScript_p1oir"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m7lx0"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_n432f"]
+[sub_resource type="Animation" id="Animation_oqn7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel_A2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.361301)]
+}
+
+[sub_resource type="Animation" id="Animation_ajsxs"]
+resource_name = "floating"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel_A2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.361301), Vector3(0, 0, 0.336465), Vector3(0, 0, -0.0346099), Vector3(0, 0, -0.361283)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1gbm5"]
+_data = {
+"RESET": SubResource("Animation_oqn7s"),
+"floating": SubResource("Animation_ajsxs")
+}
 
 [node name="Player" type="CharacterBody3D"]
 script = SubResource("GDScript_p1oir")
@@ -12,5 +50,10 @@ script = SubResource("GDScript_p1oir")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_m7lx0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_n432f")
+[node name="Barrel_A2" parent="." instance=ExtResource("1_r0k0v")]
+transform = Transform3D(0.935438, 0.353492, 0, -0.353492, 0.935438, 0, 0, 0, 1, 0.249576, 0.132194, 0.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1gbm5")
+}
